@@ -4,7 +4,7 @@
             "rank": 1,
             "user_id": 2,
             "nickname": "Quieto",
-            "profile_image": "uploads\/profiles\/68894e13563fe.jpeg",
+            "profile_image": "..\/uploads\/profiles\/68894e13563fe.jpeg",
             "total_points": 150,
             "first_point_date": null
         },
@@ -17,6 +17,6 @@
             "first_point_date": null
         }
     ],
-    "created_at": 1753996786,
-    "expires_at": 1753996846
+    "created_at": 1753999485,
+    "expires_at": 1753999545
 }

@@ -87,182 +87,367 @@ if ($selectedEventId) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Productos - Sistema de Puntos</title>
+    <title>🎁 Tienda de Premios - FluidGaming Arena</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
+        /* Estilos específicos para el catálogo de productos */
+        .products-container {
+            max-width: 1400px;
             margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+        }
+
+        .products-header {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
             overflow: hidden;
         }
 
-        .header {
+        .products-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .products-header:hover::before {
+            left: 100%;
+        }
+
+        .products-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        .products-header p {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .user-info {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
+        .user-stats {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 1rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .user-points {
-            font-size: 1.2em;
-            font-weight: bold;
+        .user-points-display {
+            background: rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            color: #e2e8f0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .back-btn {
-            background: rgba(255, 255, 255, 0.2);
+        .back-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
+            padding: 1rem 2rem;
+            border-radius: 12px;
             text-decoration: none;
-            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
         }
 
-        .content {
-            padding: 30px;
+        .event-selector-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .event-selector {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
+        .event-selector-card h3 {
+            color: #e2e8f0;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .event-selector h3 {
-            color: #495057;
-            margin-bottom: 15px;
-        }
-
-        .event-selector select {
+        .event-select {
             width: 100%;
-            max-width: 400px;
-            padding: 12px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 16px;
+            max-width: 500px;
+            padding: 1rem;
+            background: rgba(15, 15, 35, 0.8);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            color: #e2e8f0;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
-        .stands-grid {
+        .event-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .info-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-left: 4px solid #22c55e;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card h4 {
+            color: #22c55e;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card ul {
+            color: #94a3b8;
+            margin-left: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .info-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0 0.25rem;
+        }
+
+        .status-can-claim {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .status-insufficient {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .status-claimed {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card-mini {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card-mini:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-section {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-controls {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-input, .filter-select {
+            padding: 1rem;
+            background: rgba(15, 15, 35, 0.8);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            color: #e2e8f0;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus, .filter-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .clear-filters-btn {
+            background: linear-gradient(135deg, #64748b, #475569);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .clear-filters-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(100, 116, 139, 0.4);
+        }
+
+        .stands-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
         }
 
         .stand-card {
-            background: #f8f9fa;
-            border-radius: 15px;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         .stand-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
         }
 
         .stand-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
+            padding: 2rem;
             text-align: center;
-        }
-
-        .stand-header h3 {
-            font-size: 1.3em;
-            margin-bottom: 5px;
-        }
-
-        .stand-header p {
-            opacity: 0.9;
-            font-size: 0.9em;
-        }
-
-        .products-list {
-            padding: 20px;
-        }
-
-        .product-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
             position: relative;
         }
 
-        .product-item:hover {
+        .stand-header h3 {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stand-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+
+        .products-grid {
+            padding: 2rem;
+        }
+
+        .product-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            background: rgba(15, 15, 35, 0.3);
+        }
+
+        .product-card:hover {
             border-color: #667eea;
-            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.1);
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
         }
 
-        .product-item.claimed {
-            background: #f8f9fa;
-            border-color: #28a745;
-            opacity: 0.8;
+        .product-card.can-claim {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.05);
         }
 
-        .product-item.insufficient-points {
-            border-color: #dc3545;
-            background: #fff5f5;
+        .product-card.insufficient {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
         }
 
-        .product-item.can-claim {
-            border-color: #28a745;
-            background: #f8fff9;
+        .product-card.claimed {
+            border-color: #fbbf24;
+            background: rgba(251, 191, 36, 0.05);
+            opacity: 0.7;
         }
 
         .product-image {
             width: 80px;
             height: 80px;
-            border-radius: 10px;
-            object-fit: cover;
-            background: #f8f9fa;
+            border-radius: 12px;
+            background: rgba(102, 126, 234, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2em;
-            color: #666;
+            font-size: 2.5rem;
+            flex-shrink: 0;
         }
 
         .product-info {
@@ -270,179 +455,127 @@ if ($selectedEventId) {
         }
 
         .product-name {
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
+            color: #e2e8f0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
         .product-description {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 10px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
         }
 
         .product-points {
-            font-size: 1.1em;
-            font-weight: bold;
             color: #667eea;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
         .product-status {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 5px 12px;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
             border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: bold;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
-        .status-available {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-claimed {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-insufficient {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .status-can-claim {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-
-        .no-products {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-
-        .no-products h4 {
-            margin-bottom: 10px;
+        .claim-ready-badge {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
         }
 
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
-            color: #666;
+            padding: 4rem 2rem;
+            color: #94a3b8;
         }
 
         .empty-state h3 {
-            margin-bottom: 15px;
-            color: #495057;
+            color: #e2e8f0;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .filter-bar {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .filter-bar input,
-        .filter-bar select {
-            padding: 10px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 14px;
-        }
-
-        .filter-bar button {
-            padding: 10px 20px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s;
-        }
-
-        .filter-bar button:hover {
-            background: #5a6fd8;
-        }
-
-        .stats-summary {
-            background: #e3f2fd;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .stat-item {
+        .no-products {
             text-align: center;
+            padding: 3rem;
+            color: #94a3b8;
         }
 
-        .stat-number {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            color: #666;
+        .no-products h4 {
+            color: #e2e8f0;
+            margin-bottom: 0.5rem;
         }
 
         @media (max-width: 768px) {
-            .stands-grid {
+            .products-container {
+                padding: 1rem;
+            }
+
+            .user-stats {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .filter-controls {
                 grid-template-columns: 1fr;
             }
 
-            .filter-bar {
-                flex-direction: column;
-                align-items: stretch;
+            .stands-container {
+                grid-template-columns: 1fr;
             }
 
-            .stats-summary {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .user-info {
+            .product-card {
                 flex-direction: column;
                 text-align: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🛍️ Catálogo de Productos</h1>
-            <p>Descubre qué puedes canjear con tus puntos</p>
-
-            <div class="user-info">
-                <div class="user-points">
-                    💰 Tus puntos: <?php echo number_format($current_user['total_points']); ?>
+    <div class="products-container">
+        <div class="products-header">
+            <h1>🎁 Tienda de Premios</h1>
+            <p>Descubre qué puedes canjear con tus puntos de poder</p>
+            
+            <div class="user-stats">
+                <div class="user-points-display">
+                    ⚡ <?php echo number_format($current_user['total_points']); ?> Puntos de Poder
                 </div>
-                <a href="../" class="back-btn">← Volver al Dashboard</a>
+                <a href="../" class="back-button">
+                    ← Volver al Arena
+                </a>
             </div>
         </div>
-
-        <div class="content">
             <?php if (empty($activeEvents)): ?>
                 <div class="empty-state">
-                    <h3>No hay eventos activos</h3>
-                    <p>Actualmente no hay eventos en curso. Los productos estarán disponibles cuando haya eventos activos.</p>
+                    <h3>⚔️ No hay eventos activos</h3>
+                    <p>Actualmente no hay batallas en curso. Los premios estarán disponibles cuando haya eventos activos.</p>
                 </div>
             <?php else: ?>
-                <div class="event-selector">
-                    <h3>Seleccionar Evento</h3>
-                    <select onchange="changeEvent(this.value)">
+                <div class="event-selector-card">
+                    <h3>🏟️ Seleccionar Arena de Batalla</h3>
+                    <select class="event-select" onchange="changeEvent(this.value)">
                         <?php foreach ($activeEvents as $eventOption): ?>
                             <option value="<?php echo $eventOption['id']; ?>"
                                 <?php echo $eventOption['id'] == $selectedEventId ? 'selected' : ''; ?>>
@@ -454,24 +587,23 @@ if ($selectedEventId) {
                     </select>
                 </div>
 
-                <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 4px solid #2196f3;">
-                    <h4 style="color: #1976d2; margin-bottom: 10px;">ℹ️ Cómo funciona el canje de productos</h4>
-                    <ul style="color: #424242; margin-left: 20px;">
-                        <li><strong>Productos disponibles:</strong> Puedes ver todos los productos organizados por stand</li>
-                        <li><strong>Puntos requeridos:</strong> Cada producto muestra cuántos puntos necesitas para canjearlo</li>
-                        <li><strong>Estado del producto:</strong>
-                            <span style="background: #d1ecf1; color: #0c5460; padding: 2px 8px; border-radius: 12px; font-size: 0.8em;">Puedes Reclamar</span> - Tienes suficientes puntos |
-                            <span style="background: #f8d7da; color: #721c24; padding: 2px 8px; border-radius: 12px; font-size: 0.8em;">Puntos Insuficientes</span> - Necesitas más puntos |
-                            <span style="background: #fff3cd; color: #856404; padding: 2px 8px; border-radius: 12px; font-size: 0.8em;">Ya Reclamado</span> - Solo puedes reclamar cada producto una vez
+                <div class="info-card">
+                    <h4>ℹ️ Cómo funciona el canje de premios</h4>
+                    <ul>
+                        <li><strong>Explora los premios:</strong> Cada stand tiene productos únicos esperándote</li>
+                        <li><strong>Verifica tus puntos:</strong> 
+                            <span class="status-badge status-can-claim">Puedes Reclamar</span> - Tienes suficientes puntos |
+                            <span class="status-badge status-insufficient">Puntos Insuficientes</span> - Necesitas más batallas |
+                            <span class="status-badge status-claimed">Ya Reclamado</span> - Solo uno por jugador
                         </li>
-                        <li><strong>Para reclamar:</strong> Dirígete al stand correspondiente y muestra tu perfil al encargado</li>
+                        <li><strong>Para reclamar:</strong> Ve al stand correspondiente y muestra tu perfil gaming al encargado</li>
                     </ul>
                 </div>
 
                 <?php if (empty($stands)): ?>
                     <div class="empty-state">
-                        <h3>No hay stands en este evento</h3>
-                        <p>Este evento aún no tiene stands configurados con productos.</p>
+                        <h3>🏪 No hay stands en esta batalla</h3>
+                        <p>Esta arena aún no tiene stands configurados con premios.</p>
                     </div>
                 <?php else: ?>
                     <?php
@@ -496,61 +628,63 @@ if ($selectedEventId) {
                     }
                     ?>
 
-                    <div class="stats-summary">
-                        <div class="stat-item">
+                    <div class="stats-grid">
+                        <div class="stat-card-mini">
                             <div class="stat-number"><?php echo $totalProducts; ?></div>
-                            <div class="stat-label">Total Productos</div>
+                            <div class="stat-label">Total Premios</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-card-mini">
                             <div class="stat-number"><?php echo $availableProducts; ?></div>
                             <div class="stat-label">Disponibles</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-card-mini">
                             <div class="stat-number"><?php echo $affordableProducts; ?></div>
-                            <div class="stat-label">Puedes Canjear</div>
+                            <div class="stat-label">Puedes Obtener</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-card-mini">
                             <div class="stat-number"><?php echo $claimedProducts; ?></div>
                             <div class="stat-label">Ya Reclamados</div>
                         </div>
                     </div>
 
-                    <div class="filter-bar">
-                        <input type="text" id="search_products" placeholder="Buscar productos..." oninput="filterProducts()">
-                        <select id="filter_status" onchange="filterProducts()">
-                            <option value="">Todos los estados</option>
-                            <option value="available">Disponibles (todos)</option>
-                            <option value="affordable">Puedo canjear ahora</option>
-                            <option value="insufficient">Puntos insuficientes</option>
-                            <option value="claimed">Ya reclamados por mí</option>
-                        </select>
-                        <button onclick="clearFilters()">Limpiar Filtros</button>
+                    <div class="filter-section">
+                        <div class="filter-controls">
+                            <input type="text" id="search_products" class="search-input" placeholder="🔍 Buscar premios..." oninput="filterProducts()">
+                            <select id="filter_status" class="filter-select" onchange="filterProducts()">
+                                <option value="">Todos los estados</option>
+                                <option value="available">Disponibles (todos)</option>
+                                <option value="affordable">Puedo obtener ahora</option>
+                                <option value="insufficient">Puntos insuficientes</option>
+                                <option value="claimed">Ya reclamados por mí</option>
+                            </select>
+                            <button class="clear-filters-btn" onclick="clearFilters()">Limpiar</button>
+                        </div>
                     </div>
 
-                    <div class="stands-grid">
+                    <div class="stands-container">
                         <?php foreach ($stands as $standInfo): ?>
                             <div class="stand-card" data-stand-id="<?php echo $standInfo['id']; ?>">
                                 <div class="stand-header">
-                                    <h3><?php echo htmlspecialchars($standInfo['name']); ?></h3>
+                                    <h3>🏪 <?php echo htmlspecialchars($standInfo['name']); ?></h3>
                                     <p>Encargado: <?php echo htmlspecialchars($standInfo['manager_name'] ?? 'Sin asignar'); ?></p>
                                 </div>
 
-                                <div class="products-list">
+                                <div class="products-grid">
                                     <?php if (empty($standProducts[$standInfo['id']])): ?>
                                         <div class="no-products">
-                                            <h4>Sin productos</h4>
-                                            <p>Este stand aún no tiene productos disponibles.</p>
+                                            <h4>📦 Sin premios</h4>
+                                            <p>Este stand aún no tiene premios disponibles.</p>
                                         </div>
                                     <?php else: ?>
                                         <?php foreach ($standProducts[$standInfo['id']] as $prod): ?>
                                             <?php
                                             $isClaimed = !empty($prod['claim_id']);
                                             $canAfford = $current_user['total_points'] >= $prod['points_required'];
-                                            $statusClass = $isClaimed ? 'claimed' : ($canAfford ? 'can-claim' : 'insufficient-points');
+                                            $cardClass = $isClaimed ? 'claimed' : ($canAfford ? 'can-claim' : 'insufficient');
                                             $statusText = $isClaimed ? 'Ya Reclamado' : ($canAfford ? 'Puedes Reclamar' : 'Puntos Insuficientes');
-                                            $statusBadgeClass = $isClaimed ? 'status-claimed' : ($canAfford ? 'status-can-claim' : 'status-insufficient');
+                                            $statusClass = $isClaimed ? 'status-claimed' : ($canAfford ? 'status-can-claim' : 'status-insufficient');
                                             ?>
-                                            <div class="product-item <?php echo $statusClass; ?>"
+                                            <div class="product-card <?php echo $cardClass; ?>"
                                                 data-name="<?php echo strtolower($prod['name']); ?>"
                                                 data-status="<?php echo $isClaimed ? 'claimed' : ($canAfford ? 'affordable' : 'insufficient'); ?>"
                                                 data-points="<?php echo $prod['points_required']; ?>">
@@ -559,9 +693,9 @@ if ($selectedEventId) {
                                                     <?php if ($prod['image_url']): ?>
                                                         <img src="../<?php echo htmlspecialchars($prod['image_url']); ?>"
                                                             alt="<?php echo htmlspecialchars($prod['name']); ?>"
-                                                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                                                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
                                                     <?php else: ?>
-                                                        📦
+                                                        🎁
                                                     <?php endif; ?>
                                                 </div>
 
@@ -575,19 +709,17 @@ if ($selectedEventId) {
                                                         </div>
                                                     <?php endif; ?>
                                                     <div class="product-points">
-                                                        💎 <?php echo number_format($prod['points_required']); ?> puntos
+                                                        ⚡ <?php echo number_format($prod['points_required']); ?> puntos
                                                     </div>
                                                 </div>
 
-                                                <div class="product-status <?php echo $statusBadgeClass; ?>">
+                                                <div class="product-status <?php echo $statusClass; ?>">
                                                     <?php echo $statusText; ?>
                                                 </div>
 
                                                 <?php if (!$isClaimed && $canAfford): ?>
-                                                    <div style="position: absolute; bottom: 10px; right: 10px;">
-                                                        <small style="background: #28a745; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.7em;">
-                                                            ✓ Listo para canjear
-                                                        </small>
+                                                    <div class="claim-ready-badge">
+                                                        ✓ Listo para obtener
                                                     </div>
                                                 <?php endif; ?>
                                             </div>
@@ -600,7 +732,6 @@ if ($selectedEventId) {
                 <?php endif; ?>
             <?php endif; ?>
         </div>
-    </div>
 
     <script>
         function changeEvent(eventId) {
@@ -611,39 +742,39 @@ if ($selectedEventId) {
             const searchTerm = document.getElementById('search_products').value.toLowerCase();
             const statusFilter = document.getElementById('filter_status').value;
 
-            const productItems = document.querySelectorAll('.product-item');
+            const productCards = document.querySelectorAll('.product-card');
             const standCards = document.querySelectorAll('.stand-card');
 
-            productItems.forEach(item => {
-                const name = item.dataset.name;
-                const status = item.dataset.status;
+            productCards.forEach(card => {
+                const name = card.dataset.name;
+                const status = card.dataset.status;
 
-                let showItem = true;
+                let showCard = true;
 
                 // Apply search filter
                 if (searchTerm && !name.includes(searchTerm)) {
-                    showItem = false;
+                    showCard = false;
                 }
 
                 // Apply status filter
                 if (statusFilter) {
                     if (statusFilter === 'available' && status === 'claimed') {
-                        showItem = false;
+                        showCard = false;
                     } else if (statusFilter === 'affordable' && status !== 'affordable') {
-                        showItem = false;
+                        showCard = false;
                     } else if (statusFilter === 'insufficient' && status !== 'insufficient') {
-                        showItem = false;
+                        showCard = false;
                     } else if (statusFilter === 'claimed' && status !== 'claimed') {
-                        showItem = false;
+                        showCard = false;
                     }
                 }
 
-                item.style.display = showItem ? 'flex' : 'none';
+                card.style.display = showCard ? 'flex' : 'none';
             });
 
             // Hide stands that have no visible products
             standCards.forEach(card => {
-                const visibleProducts = card.querySelectorAll('.product-item[style="display: flex"], .product-item:not([style*="display: none"])');
+                const visibleProducts = card.querySelectorAll('.product-card[style="display: flex"], .product-card:not([style*="display: none"])');
                 const hasNoProducts = card.querySelector('.no-products');
 
                 if (visibleProducts.length === 0 && !hasNoProducts) {

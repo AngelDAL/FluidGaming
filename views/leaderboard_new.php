@@ -993,7 +993,7 @@ if (!$currentUser) {
                 
                 const position = user.rank;
                 const positionClass = position === 1 ? 'first' : position === 2 ? 'second' : 'third';
-                const profileImage = user.profile_image || 'https://via.placeholder.com/100';
+                const profileImage = user.profile_image || 'https://picsum.photos/id/237/200/200';
                 const crown = position === 1 ? '<div class="crown">👑</div>' : '';
                 
                 html += `

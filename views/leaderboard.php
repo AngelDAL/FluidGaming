@@ -753,7 +753,7 @@ if (!$currentUser) {
                 </a>
                 <div class="dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" onclick="toggleDropdown()">
-                        <img src="<?php echo htmlspecialchars($currentUser['profile_image'] ?? 'https://via.placeholder.com/30'); ?>"
+                        <img src="<?php echo htmlspecialchars($currentUser['profile_image'] ?? 'https://picsum.photos/30'); ?>"
                             alt="Profile" class="rounded-circle me-2" width="30" height="30">
                         <?php echo htmlspecialchars($currentUser['nickname']); ?>
                     </a>
@@ -942,8 +942,8 @@ if (!$currentUser) {
             leaderboard.forEach((entry, index) => {
                 const isCurrentUser = entry.user_id == currentUserId;
                 const rankClass = getRankClass(entry.rank);
-                const profileImage = entry.profile_image || 'https://via.placeholder.com/60';
-
+                const profileImage = entry.profile_image || 'https://picsum.photos/200/200?random=' + entry.user_id;
+                console.log(profileImage)
                 html += `
                     <div class="leaderboard-entry ${isCurrentUser ? 'current-user' : ''}">
                         <div class="rank-badge ${rankClass}">
@@ -993,7 +993,7 @@ if (!$currentUser) {
                 
                 const position = user.rank;
                 const positionClass = position === 1 ? 'first' : position === 2 ? 'second' : 'third';
-                const profileImage = user.profile_image || 'https://via.placeholder.com/100';
+                const profileImage = user.profile_image || 'https://picsum.photos/200/200?random=' + user.user_id;
                 const crown = position === 1 ? '<div class="crown">👑</div>' : '';
                 
                 html += `
@@ -1062,7 +1062,7 @@ if (!$currentUser) {
             contextData.context.forEach(entry => {
                 const isCurrentUser = entry.is_current_user;
                 const rankClass = getRankClass(entry.rank);
-                const profileImage = entry.profile_image || 'https://via.placeholder.com/40';
+                const profileImage = entry.profile_image || 'https://picsum.photos/40/40?random=' + entry.user_id;
 
                 html += `
                     <div class="leaderboard-entry ${isCurrentUser ? 'current-user' : ''}" style="padding: 1rem;">
