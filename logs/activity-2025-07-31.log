@@ -1,0 +1,2 @@
+{"timestamp":"2025-07-31 11:56:47","level":"INFO","type":"activity","message":"Health check test log entry","context":[],"meta":{"pid":12044,"memory_usage":2097152,"request_id":"req_688bae5f083ff4.37892245"}}
+{"timestamp":"2025-07-31 11:57:01","level":"INFO","type":"activity","message":"Health check test log entry","context":[],"meta":{"pid":10032,"memory_usage":2097152,"request_id":"req_688bae6daa5c49.04127863"}}

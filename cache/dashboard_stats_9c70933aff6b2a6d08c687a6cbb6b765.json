@@ -1,0 +1,38 @@
+{
+    "data": {
+        "overall": {
+            "total_users": 2,
+            "total_events": 3,
+            "total_tournaments": 0,
+            "total_stands": 1,
+            "total_products": 1,
+            "total_points_distributed": "0",
+            "total_claims": 2
+        },
+        "recent_activity": {
+            "recent_point_transactions": 0,
+            "recent_claims": 0,
+            "active_users_week": 0
+        },
+        "top_performers": [
+            {
+                "id": 2,
+                "nickname": "Quieto",
+                "profile_image": "uploads\/profiles\/68894e13563fe.jpeg",
+                "total_points": 150,
+                "tournaments_participated": 0,
+                "products_claimed": 1
+            },
+            {
+                "id": 3,
+                "nickname": "test_user",
+                "profile_image": null,
+                "total_points": 100,
+                "tournaments_participated": 0,
+                "products_claimed": 1
+            }
+        ]
+    },
+    "created_at": 1753984597,
+    "expires_at": 1753985197
+}

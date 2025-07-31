@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "rank": 1,
+            "user_id": 2,
+            "nickname": "Quieto",
+            "profile_image": "uploads\/profiles\/68894e13563fe.jpeg",
+            "total_points": 150,
+            "first_point_date": null
+        },
+        {
+            "rank": 2,
+            "user_id": 3,
+            "nickname": "test_user",
+            "profile_image": null,
+            "total_points": 100,
+            "first_point_date": null
+        }
+    ],
+    "created_at": 1753996786,
+    "expires_at": 1753996846
+}
