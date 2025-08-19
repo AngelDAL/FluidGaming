@@ -35,58 +35,93 @@ if (!$currentUser) {
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
             min-height: 100vh;
             line-height: 1.6;
-            color: #2c3e50;
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(102, 126, 234, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 1rem 0;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(90deg, #181828 60%, #667eea 100%);
+            border-bottom: 1.5px solid #667eea;
+            color: #e2e8f0;
+            padding: 0.35rem 0;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
             position: sticky;
             top: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar .container {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
         }
 
         .navbar-brand {
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             text-decoration: none;
+            letter-spacing: 0.5px;
         }
 
-        .nav-link {
-            color: #2c3e50 !important;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-            padding: 0.5rem 1rem !important;
-            margin: 0 0.25rem;
-            text-decoration: none;
+        .navbar .btn {
+            border: none;
+            background: none;
+            color: #e2e8f0;
+            font-size: 1.25rem;
+            padding: 0.35rem 0.7rem;
+            border-radius: 50%;
+            transition: background 0.2s;
+            box-shadow: none;
         }
 
-        .nav-link:hover {
-            background: rgba(102, 126, 234, 0.1);
-            transform: translateY(-1px);
+        .navbar .btn:active,
+        .navbar .btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #667eea44;
         }
 
-        .nav-link.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white !important;
+        .navbar .btn:hover {
+            background: rgba(102, 126, 234, 0.12);
+            color: #fff;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
+        .navbar .fa-arrow-left,
+        .navbar .fa-bars {
+            font-size: 1.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .navbar .btn {
+                font-size: 1.1rem;
+                padding: 0.3rem 0.6rem;
+            }
         }
 
         .d-flex {
@@ -110,14 +145,14 @@ if (!$currentUser) {
         }
 
         .leaderboard-hero {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 3rem 2rem;
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            margin-bottom: 3rem;
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            margin-bottom: 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -139,7 +174,7 @@ if (!$currentUser) {
         }
 
         .leaderboard-hero h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
@@ -150,22 +185,35 @@ if (!$currentUser) {
         }
 
         .leaderboard-hero p {
-            font-size: 1.2rem;
-            color: #7f8c8d;
+            font-size: 1.1rem;
+            color: #94a3b8;
             max-width: 600px;
             margin: 0 auto;
         }
 
         .trophy-animation {
-            font-size: 4rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
             animation: bounce 2s infinite;
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
         }
 
         .stats-grid {
@@ -175,14 +223,42 @@ if (!$currentUser) {
             margin-bottom: 3rem;
         }
 
+        .user-priority-section {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-priority-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .user-priority-section h3 {
+            color: #e2e8f0;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
         .stat-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 41, 59, 0.8);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             text-align: center;
             transition: all 0.3s ease;
             position: relative;
@@ -203,7 +279,7 @@ if (!$currentUser) {
 
         .stat-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
 
         .stat-card:hover::before {
@@ -211,7 +287,7 @@ if (!$currentUser) {
         }
 
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 800;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
@@ -222,20 +298,20 @@ if (!$currentUser) {
         }
 
         .stat-label {
-            color: #7f8c8d;
-            font-size: 1rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .podium-section {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 2rem;
+            border-radius: 20px;
+            padding: 1.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
             position: relative;
             overflow: hidden;
         }
@@ -330,47 +406,54 @@ if (!$currentUser) {
         }
 
         @keyframes float {
-            0%, 100% { transform: translateX(-50%) translateY(0px); }
-            50% { transform: translateX(-50%) translateY(-10px); }
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0px);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
         }
 
         .user-context-section {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 41, 59, 0.8);
             backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 2rem;
+            border-radius: 16px;
+            padding: 1.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(102, 126, 234, 0.2);
         }
 
         .user-context-section h5 {
-            color: #2c3e50;
+            color: #e2e8f0;
             font-weight: 700;
             margin-bottom: 1.5rem;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         .leaderboard-main {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(30, 41, 59, 0.8);
             backdrop-filter: blur(20px);
-            border-radius: 24px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
             margin-bottom: 2rem;
         }
 
         .leaderboard-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 2rem;
+            padding: 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .leaderboard-header h3 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             margin: 0;
         }
@@ -385,11 +468,12 @@ if (!$currentUser) {
             background: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
             cursor: pointer;
+            font-size: 0.9rem;
         }
 
         .refresh-btn:hover {
@@ -398,13 +482,13 @@ if (!$currentUser) {
         }
 
         .auto-refresh-indicator {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             opacity: 0.8;
         }
 
         .leaderboard-entry {
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
             display: flex;
             align-items: center;
             transition: all 0.3s ease;
@@ -419,12 +503,12 @@ if (!$currentUser) {
             top: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
             transition: left 0.5s ease;
         }
 
         .leaderboard-entry:hover {
-            background: rgba(102, 126, 234, 0.02);
+            background: rgba(102, 126, 234, 0.1);
             transform: translateX(5px);
         }
 
@@ -433,22 +517,22 @@ if (!$currentUser) {
         }
 
         .leaderboard-entry.current-user {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.05));
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.1));
             border-left: 4px solid #667eea;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
         .rank-badge {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 1.1rem;
-            margin-right: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            font-size: 1rem;
+            margin-right: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
 
@@ -475,7 +559,7 @@ if (!$currentUser) {
         }
 
         .rank-other {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            /* background: linear-gradient(135deg, #667eea, #764ba2); */
             color: white;
         }
 
@@ -486,12 +570,12 @@ if (!$currentUser) {
         }
 
         .profile-image {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 3px solid #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
             margin-right: 1rem;
             transition: all 0.3s ease;
         }
@@ -501,14 +585,14 @@ if (!$currentUser) {
         }
 
         .user-info h6 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            color: #2c3e50;
+            color: #e2e8f0;
             margin-bottom: 0.25rem;
         }
 
         .user-info .user-status {
-            color: #7f8c8d;
+            color: #94a3b8;
             font-size: 0.9rem;
             font-weight: 500;
         }
@@ -519,7 +603,7 @@ if (!$currentUser) {
             padding: 0.75rem 1.5rem;
             border-radius: 25px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: .6rem;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
             transition: all 0.3s ease;
         }
@@ -544,8 +628,13 @@ if (!$currentUser) {
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .visually-hidden {
@@ -555,7 +644,7 @@ if (!$currentUser) {
             padding: 0 !important;
             margin: -1px !important;
             overflow: hidden !important;
-            clip: rect(0,0,0,0) !important;
+            clip: rect(0, 0, 0, 0) !important;
             white-space: nowrap !important;
             border: 0 !important;
         }
@@ -573,13 +662,17 @@ if (!$currentUser) {
         .empty-state {
             text-align: center;
             padding: 4rem 2rem;
-            color: #7f8c8d;
+            color: #94a3b8;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 20px;
+            margin: 2rem 0;
         }
 
         .empty-state i {
             font-size: 4rem;
             margin-bottom: 1rem;
-            opacity: 0.5;
+            opacity: 0.7;
+            color: #667eea;
         }
 
         /* Animations */
@@ -588,56 +681,70 @@ if (!$currentUser) {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .stat-card, .leaderboard-entry, .podium-place {
+        .stat-card,
+        .leaderboard-entry,
+        .podium-place {
             animation: fadeInUp 0.6s ease forwards;
         }
 
-        .stat-card:nth-child(1) { animation-delay: 0.1s; }
-        .stat-card:nth-child(2) { animation-delay: 0.2s; }
-        .stat-card:nth-child(3) { animation-delay: 0.3s; }
-        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+        .stat-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .stat-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .stat-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .stat-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
             }
-            
+
             .leaderboard-hero {
                 padding: 2rem 1rem;
             }
-            
+
             .leaderboard-hero h1 {
                 font-size: 2rem;
             }
-            
+
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
             }
-            
+
             .podium-container {
                 flex-direction: column;
                 align-items: center;
                 gap: 1rem;
             }
-            
+
             .leaderboard-entry {
                 padding: 1rem;
             }
-            
+
             .leaderboard-header {
                 flex-direction: column;
                 gap: 1rem;
                 text-align: center;
             }
-            
+
             .refresh-controls {
                 flex-direction: column;
                 gap: 0.5rem;
@@ -657,12 +764,13 @@ if (!$currentUser) {
             position: absolute;
             top: 100%;
             right: 0;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            min-width: 150px;
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             z-index: 1000;
+            min-width: 200px;
         }
 
         .dropdown-menu.show {
@@ -671,17 +779,24 @@ if (!$currentUser) {
 
         .dropdown-item {
             display: block;
-            padding: 0.5rem 1rem;
-            color: #333;
+            padding: 0.75rem 1rem;
+            color: #e2e8f0;
             text-decoration: none;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
         }
 
         .dropdown-item:hover {
-            background: #f8f9fa;
+            background: rgba(102, 126, 234, 0.2);
+            color: #fff;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu.show {
+            display: block;
         }
 
         .position-relative {
@@ -730,85 +845,44 @@ if (!$currentUser) {
         }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="responsive.css">
 </head>
 
 <body>
     <nav class="navbar">
-        <div class="container">
-            <a class="navbar-brand" href="../">
-                <i class="fas fa-trophy me-2"></i>Sistema de Puntos
+        <div class="container d-flex justify-content-between align-items-center">
+            <!-- Botón de Regresar -->
+            <button class="btn btn-outline-light d-md-none" onclick="window.history.back();">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+
+            <!-- Título o Logo -->
+            <a class="navbar-brand mx-auto d-none d-md-block" href="../">
+                <i class="fas fa-trophy me-2"></i>Ranking
             </a>
-            <div class="d-flex align-items-center gap-3">
-                <a class="nav-link" href="../">
-                    <i class="fas fa-home me-1"></i>Dashboard
-                </a>
-                <a class="nav-link active" href="leaderboard.php">
-                    <i class="fas fa-medal me-1"></i>Leaderboard
-                </a>
-                <a class="nav-link position-relative" href="notifications.php" title="Notificaciones">
-                    <i class="fas fa-bell"></i>
-                    <span id="notification-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
-                        0
-                    </span>
-                </a>
-                <div class="dropdown">
-                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" onclick="toggleDropdown()">
-                        <img src="<?php echo htmlspecialchars($currentUser['profile_image'] ?? 'https://picsum.photos/30'); ?>"
-                            alt="Profile" class="rounded-circle me-2" width="30" height="30">
-                        <?php echo htmlspecialchars($currentUser['nickname']); ?>
-                    </a>
-                    <ul class="dropdown-menu" id="dropdownMenu">
-                        <li><a class="dropdown-item" href="../includes/logout.php">Cerrar Sesión</a></li>
-                    </ul>
-                </div>
-            </div>
+
+            <!-- Menú Hamburguesa -->
+            <!-- <button class="btn btn-outline-light d-md-none" onclick="toggleDropdown()">
+                <i class="fas fa-bars"></i>
+            </button> -->
         </div>
     </nav>
 
     <div class="container">
         <!-- Hero Section -->
-        <div class="leaderboard-hero">
-            <div class="trophy-animation">🏆</div>
+        <!-- <div class="leaderboard-hero">
+            <div class="trophy-animation"><i class="fas fa-trophy fa-2x" style="color:#ffd700;"></i></div>
             <h1>Leaderboard</h1>
             <p>Compite con otros usuarios, escala posiciones y demuestra tu habilidad en los torneos</p>
-        </div>
-
-        <!-- Statistics Grid -->
-        <div class="stats-grid" id="statsGrid">
-            <div class="stat-card">
-                <div class="stat-number" id="totalUsers">-</div>
-                <div class="stat-label">Usuarios Activos</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="highestPoints">-</div>
-                <div class="stat-label">Puntos Máximos</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="averagePoints">-</div>
-                <div class="stat-label">Promedio de Puntos</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="userRank">-</div>
-                <div class="stat-label">Tu Posición</div>
-            </div>
-        </div>
-
+        </div> -->
         <!-- Podium Section -->
-        <div class="podium-section" id="podiumSection" style="display: none;">
-            <h3 class="text-center mb-4">🥇 Top 3 Campeones</h3>
-            <div class="podium-container" id="podiumContainer">
-                <!-- Podium will be rendered here -->
-            </div>
-        </div>
-
-        <!-- User Context Section -->
-        <div class="user-context-section" id="userContextSection" style="display: none;">
-            <h5><i class="fas fa-user-circle me-2"></i>Tu Posición en el Ranking</h5>
-            <div id="userContext"></div>
+        <div class="podium-section" id="podiumSection">
+            <h3 class="text-center mb-4"><i class="fas fa-crown" style="color:#ffd700;"></i> Top 3 Campeones</h3>
+            <div class="podium-container" id="podiumContainer"></div>
         </div>
 
         <!-- Main Leaderboard -->
-        <div class="leaderboard-main">
+        <div class="leaderboard-main" style="display: none;" id="leaderboardMain">
             <div class="leaderboard-header">
                 <h3><i class="fas fa-list-ol me-2"></i>Ranking General</h3>
                 <div class="refresh-controls">
@@ -830,6 +904,52 @@ if (!$currentUser) {
                 </div>
             </div>
         </div>
+
+        <!-- User Ranking Priority Section -->
+        <div class="user-priority-section">
+            <h3 class="mb-4"><i class="fas fa-user-circle me-2"></i>Tu Posición en el Ranking</h3>
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-number" id="userRank">-</div>
+                        <div class="stat-label">Tu Posición</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-number" id="userPoints">-</div>
+                        <div class="stat-label">Tus Puntos</div>
+                    </div>
+                </div>
+            </div>
+            <div id="userContext"></div>
+        </div>
+
+        <!-- Statistics Grid -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalUsers">-</div>
+                <div class="stat-label">Usuarios Activos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="highestPoints">-</div>
+                <div class="stat-label">Puntos Máximos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="averagePoints">-</div>
+                <div class="stat-label">Promedio de Puntos</div>
+            </div>
+        </div>
+
+
+
+        <!-- User Context Section -->
+        <div class="user-context-section" id="userContextSection" style="display: none;">
+            <h5><i class="fas fa-user-circle me-2"></i>Tu Posición en el Ranking</h5>
+            <div id="userContext"></div>
+        </div>
+
+
     </div>
 
     <script>
@@ -843,7 +963,7 @@ if (!$currentUser) {
             loadLeaderboard();
             loadStats();
             loadUserContext();
-            loadNotificationCount();
+            // loadNotificationCount();
             startAutoRefresh();
         });
 
@@ -856,12 +976,12 @@ if (!$currentUser) {
         }
 
         // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const dropdown = document.querySelector('.dropdown');
-            if (!dropdown.contains(event.target)) {
-                document.getElementById('dropdownMenu').classList.remove('show');
-            }
-        });
+        // document.addEventListener('click', function(event) {
+        //     const dropdown = document.querySelector('.dropdown');
+        //     if (!dropdown.contains(event.target)) {
+        //         document.getElementById('dropdownMenu').classList.remove('show');
+        //     }
+        // });
 
         /**
          * Load leaderboard data
@@ -935,7 +1055,7 @@ if (!$currentUser) {
             }
 
             // Render podium for top 3
-            renderPodium(leaderboard.slice(0, 3));
+            renderPodium(leaderboard.slice(0, 6));
 
             // Render full leaderboard
             let html = '';
@@ -984,25 +1104,26 @@ if (!$currentUser) {
             const podiumOrder = [
                 topUsers[1], // 2nd place
                 topUsers[0], // 1st place  
-                topUsers[2]  // 3rd place
+                topUsers[2] // 3rd place
             ].filter(user => user); // Filter out undefined users
 
             let html = '';
             podiumOrder.forEach((user, index) => {
                 if (!user) return;
-                
                 const position = user.rank;
                 const positionClass = position === 1 ? 'first' : position === 2 ? 'second' : 'third';
                 const profileImage = user.profile_image || 'https://picsum.photos/200/200?random=' + user.user_id;
-                const crown = position === 1 ? '<div class="crown">👑</div>' : '';
-                
+                let icon = '';
+                if (position === 1) icon = '<i class="fas fa-crown" style="color:#ffd700;"></i>';
+                else if (position === 2) icon = '<i class="fas fa-medal" style="color:#c0c0c0;"></i>';
+                else if (position === 3) icon = '<i class="fas fa-award" style="color:#cd7f32;"></i>';
                 html += `
                     <div class="podium-place ${positionClass}">
-                        ${crown}
+                        <div class="podium-icon">${icon}</div>
                         <img src="${profileImage}" alt="Profile" class="podium-avatar">
                         <div class="podium-base">
                             <div style="font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem;">
-                                ${position === 1 ? '🥇' : position === 2 ? '🥈' : '🥉'} #${position}
+                                #${position}
                             </div>
                             <div style="font-weight: 600; margin-bottom: 0.5rem;">${escapeHtml(user.nickname)}</div>
                             <div style="font-size: 0.9rem; opacity: 0.9;">${user.total_points.toLocaleString()} pts</div>
@@ -1028,7 +1149,7 @@ if (!$currentUser) {
         }
 
         /**
-         * Load user rank
+         * Load user rank and points
          */
         async function loadUserRank() {
             try {
@@ -1037,12 +1158,27 @@ if (!$currentUser) {
 
                 if (data.success && data.data) {
                     document.getElementById('userRank').textContent = `#${data.data.rank}`;
+                    // Also update userPoints if available
+                    if (data.data.total_points !== undefined) {
+                        const userPointsEl = document.getElementById('userPoints');
+                        if (userPointsEl) {
+                            userPointsEl.textContent = data.data.total_points.toLocaleString();
+                        }
+                    }
                 } else {
                     document.getElementById('userRank').textContent = 'N/A';
+                    const userPointsEl = document.getElementById('userPoints');
+                    if (userPointsEl) {
+                        userPointsEl.textContent = '0';
+                    }
                 }
             } catch (error) {
                 console.error('Error loading user rank:', error);
                 document.getElementById('userRank').textContent = 'Error';
+                const userPointsEl = document.getElementById('userPoints');
+                if (userPointsEl) {
+                    userPointsEl.textContent = 'Error';
+                }
             }
         }
 
@@ -1078,7 +1214,7 @@ if (!$currentUser) {
                                 </div>
                             </div>
                         </div>
-                        <div class="points-badge" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                        <div class="points-badge" style="padding: 0.5rem;">
                             ${entry.total_points.toLocaleString()} pts
                         </div>
                     </div>
@@ -1086,7 +1222,7 @@ if (!$currentUser) {
             });
 
             content.innerHTML = html;
-            section.style.display = 'block';
+            // section.style.display = 'block';
         }
 
         /**
@@ -1103,12 +1239,10 @@ if (!$currentUser) {
          * Get rank icon for top 3
          */
         function getRankIcon(rank) {
-            const icons = {
-                1: '<i class="fas fa-crown"></i>',
-                2: '<i class="fas fa-medal"></i>',
-                3: '<i class="fas fa-award"></i>'
-            };
-            return icons[rank] || rank;
+            if (rank === 1) return '<i class="fas fa-crown" style="color:#ffd700;"></i>';
+            if (rank === 2) return '<i class="fas fa-medal" style="color:#c0c0c0;"></i>';
+            if (rank === 3) return '<i class="fas fa-award" style="color:#cd7f32;"></i>';
+            return rank;
         }
 
         /**
@@ -1150,7 +1284,7 @@ if (!$currentUser) {
                 loadLeaderboard();
                 loadStats();
                 loadUserContext();
-                loadNotificationCount();
+                // loadNotificationCount();
                 refreshCountdown = 30;
             }, 30000);
 
@@ -1168,26 +1302,26 @@ if (!$currentUser) {
         /**
          * Load notification count
          */
-        async function loadNotificationCount() {
-            try {
-                const response = await fetch('../api/notifications.php?action=unread-count');
-                const result = await response.json();
+        // async function loadNotificationCount() {
+        //     try {
+        //         const response = await fetch('../api/notifications.php?action=unread-count');
+        //         const result = await response.json();
 
-                if (result.success) {
-                    const badge = document.getElementById('notification-badge');
-                    const count = result.unread_count;
-                    
-                    if (count > 0) {
-                        badge.textContent = count > 99 ? '99+' : count;
-                        badge.style.display = 'inline-block';
-                    } else {
-                        badge.style.display = 'none';
-                    }
-                }
-            } catch (error) {
-                console.error('Error loading notification count:', error);
-            }
-        }
+        //         if (result.success) {
+        //             const badge = document.getElementById('notification-badge');
+        //             const count = result.unread_count;
+
+        //             if (count > 0) {
+        //                 badge.textContent = count > 99 ? '99+' : count;
+        //                 badge.style.display = 'inline-block';
+        //             } else {
+        //                 badge.style.display = 'none';
+        //             }
+        //         }
+        //     } catch (error) {
+        //         console.error('Error loading notification count:', error);
+        //     }
+        // }
 
         /**
          * Show error message

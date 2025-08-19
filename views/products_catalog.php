@@ -87,494 +87,74 @@ if ($selectedEventId) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎁 Tienda de Premios - FluidGaming Arena</title>
+    <title> Reclama Premios - Gamersland Arena</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Estilos específicos para el catálogo de productos */
-        .products-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .products-header {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            border-radius: 24px;
-            padding: 3rem 2rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .products-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .products-header:hover::before {
-            left: 100%;
-        }
-
-        .products-header h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .products-header p {
-            color: #94a3b8;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .user-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .user-points-display {
-            background: rgba(102, 126, 234, 0.15);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            padding: 1rem 2rem;
-            border-radius: 16px;
-            color: #e2e8f0;
-            font-size: 1.2rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .back-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .back-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
-        }
-
-        .event-selector-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .event-selector-card h3 {
-            color: #e2e8f0;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .event-select {
-            width: 100%;
-            max-width: 500px;
-            padding: 1rem;
-            background: rgba(15, 15, 35, 0.8);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            border-radius: 12px;
-            color: #e2e8f0;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .event-select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-        }
-
-        .info-card {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            border-left: 4px solid #22c55e;
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .info-card h4 {
-            color: #22c55e;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .info-card ul {
-            color: #94a3b8;
-            margin-left: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .info-card li {
-            margin-bottom: 0.5rem;
-        }
-
-        .status-badge {
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin: 0 0.25rem;
-        }
-
-        .status-can-claim {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
-        }
-
-        .status-insufficient {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-        }
-
-        .status-claimed {
-            background: rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card-mini {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card-mini:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .filter-section {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .filter-controls {
-            display: grid;
-            grid-template-columns: 1fr auto auto;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .search-input, .filter-select {
-            padding: 1rem;
-            background: rgba(15, 15, 35, 0.8);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            border-radius: 12px;
-            color: #e2e8f0;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus, .filter-select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-        }
-
-        .clear-filters-btn {
-            background: linear-gradient(135deg, #64748b, #475569);
-            color: white;
-            border: none;
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .clear-filters-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(100, 116, 139, 0.4);
-        }
-
-        .stands-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-        }
-
-        .stand-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .stand-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-        }
-
-        .stand-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .stand-header h3 {
-            color: white;
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .stand-header p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.9rem;
-        }
-
-        .products-grid {
-            padding: 2rem;
-        }
-
-        .product-card {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 1.5rem;
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            border-radius: 16px;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-            background: rgba(15, 15, 35, 0.3);
-        }
-
-        .product-card:hover {
-            border-color: #667eea;
-            transform: translateX(8px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
-        }
-
-        .product-card.can-claim {
-            border-color: #22c55e;
-            background: rgba(34, 197, 94, 0.05);
-        }
-
-        .product-card.insufficient {
-            border-color: #ef4444;
-            background: rgba(239, 68, 68, 0.05);
-        }
-
-        .product-card.claimed {
-            border-color: #fbbf24;
-            background: rgba(251, 191, 36, 0.05);
-            opacity: 0.7;
-        }
-
-        .product-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 12px;
-            background: rgba(102, 126, 234, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            flex-shrink: 0;
-        }
-
-        .product-info {
-            flex: 1;
-        }
-
-        .product-name {
-            color: #e2e8f0;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-description {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .product-points {
-            color: #667eea;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .product-status {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .claim-ready-badge {
-            position: absolute;
-            bottom: 1rem;
-            right: 1rem;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: #94a3b8;
-        }
-
-        .empty-state h3 {
-            color: #e2e8f0;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .no-products {
-            text-align: center;
-            padding: 3rem;
-            color: #94a3b8;
-        }
-
-        .no-products h4 {
-            color: #e2e8f0;
-            margin-bottom: 0.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .products-container {
-                padding: 1rem;
-            }
-
-            .user-stats {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .filter-controls {
-                grid-template-columns: 1fr;
-            }
-
-            .stands-container {
-                grid-template-columns: 1fr;
-            }
-
-            .product-card {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="claimRewards.css">
 </head>
 
 <body>
-    <div class="products-container">
-        <div class="products-header">
-            <h1>🎁 Tienda de Premios</h1>
-            <p>Descubre qué puedes canjear con tus puntos de poder</p>
-            
-            <div class="user-stats">
-                <div class="user-points-display">
-                    ⚡ <?php echo number_format($current_user['total_points']); ?> Puntos de Poder
-                </div>
-                <a href="../" class="back-button">
-                    ← Volver al Arena
+    <div class="products-container" style="max-width: 1100px; margin: 0 auto;">
+        <!-- Navbar superior -->
+        <nav class="navbar" style="padding: 0.7rem 0; margin-bottom: 2rem;">
+            <div class="container" style="display: flex; align-items: center; gap: 1.2rem;">
+                <a href="../" class="btn dark" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; min-width: 120px; justify-content: center;">
+                    <i class="fa-solid fa-arrow-left"></i> Regresar
                 </a>
             </div>
+        </nav>
+
+        <div class="products-header">
+            <h1><i class="fa-solid fa-gift"></i> Tienda de Premios</h1>
+            <p>Descubre qué puedes canjear con tus puntos de poder</p>
+            <div class="user-stats">
+                <div class="user-points-display">
+                    <i class="fa-solid fa-bolt"></i> <?php echo number_format($current_user['total_points']); ?> Puntos
+                </div>
+            </div>
         </div>
+
+        <?php
+        // Mostrar premios que el usuario puede reclamar
+        $claimableProducts = [];
+        foreach ($standProducts as $products) {
+            foreach ($products as $prod) {
+                $isClaimed = !empty($prod['claim_id']);
+                $canAfford = $current_user['total_points'] >= $prod['points_required'];
+                if (!$isClaimed && $canAfford) {
+                    $claimableProducts[] = $prod;
+                }
+            }
+        }
+        ?>
+        <?php if (!empty($claimableProducts)): ?>
+        <div class="section-card" style="margin-bottom:2.5rem;">
+            <h3 style="margin-bottom:1rem;"><i class="fa-solid fa-circle-check" style="color:#22c55e;"></i> Premios que puedes reclamar ahora</h3>
+            <div class="rewards-preview" style="flex-wrap:wrap; gap:1.5rem; justify-content:flex-start;">
+                <?php foreach ($claimableProducts as $prod): ?>
+                <div class="preview-card" style="min-width:260px;">
+                    <div class="preview-icon"><i class="fa-solid fa-gift"></i></div>
+                    <div>
+                        <div class="preview-title"><?php echo htmlspecialchars($prod['name']); ?></div>
+                        <div class="preview-desc" style="margin-bottom:0.5rem; color:#94a3b8;">
+                            <?php echo htmlspecialchars($prod['description']); ?>
+                        </div>
+                        <div style="color:#22c55e; font-weight:600;"><i class="fa-solid fa-bolt"></i> <?php echo number_format($prod['points_required']); ?> pts</div>
+                        <div style="font-size:0.95rem; color:#94a3b8;">Stand: <?php echo htmlspecialchars($prod['stand_name']); ?></div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endif; ?>
             <?php if (empty($activeEvents)): ?>
                 <div class="empty-state">
-                    <h3>⚔️ No hay eventos activos</h3>
+                    <h3><i class="fa-solid fa-swords"></i> No hay eventos activos</h3>
                     <p>Actualmente no hay batallas en curso. Los premios estarán disponibles cuando haya eventos activos.</p>
                 </div>
             <?php else: ?>
-                <div class="event-selector-card">
-                    <h3>🏟️ Seleccionar Arena de Batalla</h3>
+                <div class="event-selector-card" style="display: none;">
+                    <h3><i class="fa-solid fa-trophy"></i> Seleccionar Arena de Batalla</h3>
                     <select class="event-select" onchange="changeEvent(this.value)">
                         <?php foreach ($activeEvents as $eventOption): ?>
                             <option value="<?php echo $eventOption['id']; ?>"
@@ -587,22 +167,152 @@ if ($selectedEventId) {
                     </select>
                 </div>
 
-                <div class="info-card">
-                    <h4>ℹ️ Cómo funciona el canje de premios</h4>
-                    <ul>
-                        <li><strong>Explora los premios:</strong> Cada stand tiene productos únicos esperándote</li>
-                        <li><strong>Verifica tus puntos:</strong> 
-                            <span class="status-badge status-can-claim">Puedes Reclamar</span> - Tienes suficientes puntos |
-                            <span class="status-badge status-insufficient">Puntos Insuficientes</span> - Necesitas más batallas |
-                            <span class="status-badge status-claimed">Ya Reclamado</span> - Solo uno por jugador
-                        </li>
-                        <li><strong>Para reclamar:</strong> Ve al stand correspondiente y muestra tu perfil gaming al encargado</li>
-                    </ul>
-                </div>
+                                <div class="info-card" style="margin-bottom:2.5rem;">
+                                        <h4><i class="fa-solid fa-circle-info"></i> ¿Cómo reclamar un premio?</h4>
+                                        <div id="claim-steps-carousel" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap;">
+                                            <div id="stepContent" style="flex:1; min-width:220px; max-width:350px; text-align:center; touch-action: pan-y;"></div>
+                                        </div>
+                                        <div style="text-align:center; margin-top:1rem;">
+                                            <span id="stepIndicators"></span>
+                                        </div>
+                                </div>
+                                <script>
+                                                // Pasos del carrusel
+                                                const claimSteps = [
+                                                    {
+                                                        icon: '<i class="fa-solid fa-gift fa-2x" style="color:#667eea;"></i>',
+                                                        title: '1. Explora los premios',
+                                                        desc: 'Revisa los stands y descubre los premios disponibles para ti.'
+                                                    },
+                                                    {
+                                                        icon: '<i class="fa-solid fa-bolt fa-2x" style="color:#fbbf24;"></i>',
+                                                        title: '2. Verifica tus puntos',
+                                                        desc: 'Asegúrate de tener suficientes puntos para reclamar el premio que te interesa.'
+                                                    },
+                                                    {
+                                                        icon: '<i class="fa-solid fa-check-circle fa-2x" style="color:#22c55e;"></i>',
+                                                        title: '3. Elige tu premio',
+                                                        desc: 'Selecciona el premio que puedes reclamar y acércate al stand correspondiente.'
+                                                    },
+                                                    {
+                                                        icon: '<i class="fa-solid fa-id-card fa-2x" style="color:#667eea;"></i>',
+                                                        title: '4. Muestra tu perfil',
+                                                        desc: 'Presenta tu perfil de jugador al encargado del stand para validar tu identidad.'
+                                                    },
+                                                    {
+                                                        icon: '<i class="fa-solid fa-hand-holding-heart fa-2x" style="color:#2ed573;"></i>',
+                                                        title: '5. ¡Recibe tu premio!',
+                                                        desc: 'El encargado validará tu canje y podrás disfrutar de tu recompensa.'
+                                                    }
+                                                ];
+                                                let currentStep = 0;
+                                                let autoScrollInterval = null;
+                                                let isDragging = false;
+                                                let dragStartX = 0;
+                                                let dragDelta = 0;
+
+                                                function renderStep() {
+                                                    const step = claimSteps[currentStep];
+                                                    document.getElementById('stepContent').innerHTML = `
+                                                        <div style=\"margin-bottom:0.7rem;\">${step.icon}</div>
+                                                        <div style=\"font-weight:700; font-size:1.1rem; margin-bottom:0.3rem;\">${step.title}</div>
+                                                        <div style=\"color:#94a3b8; font-size:0.98rem;\">${step.desc}</div>
+                                                    `;
+                                                    // Indicadores
+                                                    let indicators = '';
+                                                    for(let i=0; i<claimSteps.length; i++) {
+                                                        indicators += `<span class=\"carousel-indicator\" data-step=\"${i}\" style=\"display:inline-block;width:10px;height:10px;margin:0 3px;border-radius:50%;background:${i===currentStep?'#667eea':'#94a3b8'};cursor:pointer;transition:background 0.2s;\"></span>`;
+                                                    }
+                                                    document.getElementById('stepIndicators').innerHTML = indicators;
+                                                    // Asignar click a los indicadores
+                                                    document.querySelectorAll('.carousel-indicator').forEach(el => {
+                                                        el.onclick = function() {
+                                                            currentStep = parseInt(this.dataset.step);
+                                                            renderStep();
+                                                            restartAutoScroll();
+                                                        };
+                                                    });
+                                                }
+
+                                                function nextStep() {
+                                                    currentStep = (currentStep + 1) % claimSteps.length;
+                                                    renderStep();
+                                                }
+
+                                                function prevStep() {
+                                                    currentStep = (currentStep - 1 + claimSteps.length) % claimSteps.length;
+                                                    renderStep();
+                                                }
+
+                                                function startAutoScroll() {
+                                                    if (autoScrollInterval) clearInterval(autoScrollInterval);
+                                                    autoScrollInterval = setInterval(() => {
+                                                        nextStep();
+                                                    }, 3500);
+                                                }
+
+                                                function restartAutoScroll() {
+                                                    startAutoScroll();
+                                                }
+
+                                                // Drag support
+                                                const stepContent = document.getElementById('stepContent');
+                                                stepContent.addEventListener('touchstart', e => {
+                                                    isDragging = true;
+                                                    dragStartX = e.touches[0].clientX;
+                                                });
+                                                stepContent.addEventListener('touchmove', e => {
+                                                    if (!isDragging) return;
+                                                    dragDelta = e.touches[0].clientX - dragStartX;
+                                                });
+                                                stepContent.addEventListener('touchend', e => {
+                                                    if (!isDragging) return;
+                                                    if (dragDelta > 40) {
+                                                        prevStep();
+                                                        restartAutoScroll();
+                                                    } else if (dragDelta < -40) {
+                                                        nextStep();
+                                                        restartAutoScroll();
+                                                    }
+                                                    isDragging = false;
+                                                    dragDelta = 0;
+                                                });
+
+                                                // Mouse drag (desktop)
+                                                let mouseDown = false;
+                                                let mouseStartX = 0;
+                                                let mouseDelta = 0;
+                                                stepContent.addEventListener('mousedown', e => {
+                                                    mouseDown = true;
+                                                    mouseStartX = e.clientX;
+                                                });
+                                                stepContent.addEventListener('mousemove', e => {
+                                                    if (!mouseDown) return;
+                                                    mouseDelta = e.clientX - mouseStartX;
+                                                });
+                                                stepContent.addEventListener('mouseup', e => {
+                                                    if (!mouseDown) return;
+                                                    if (mouseDelta > 40) {
+                                                        prevStep();
+                                                        restartAutoScroll();
+                                                    } else if (mouseDelta < -40) {
+                                                        nextStep();
+                                                        restartAutoScroll();
+                                                    }
+                                                    mouseDown = false;
+                                                    mouseDelta = 0;
+                                                });
+                                                stepContent.addEventListener('mouseleave', e => { mouseDown = false; mouseDelta = 0; });
+
+                                                document.addEventListener('DOMContentLoaded', () => {
+                                                    renderStep();
+                                                    startAutoScroll();
+                                                });
+                                </script>
 
                 <?php if (empty($stands)): ?>
                     <div class="empty-state">
-                        <h3>🏪 No hay stands en esta batalla</h3>
+                        <h3><i class="fa-solid fa-store"></i> No hay stands en esta batalla</h3>
                         <p>Esta arena aún no tiene stands configurados con premios.</p>
                     </div>
                 <?php else: ?>
@@ -647,7 +357,7 @@ if ($selectedEventId) {
                         </div>
                     </div>
 
-                    <div class="filter-section">
+                    <div class="filter-section" style="display: none;">
                         <div class="filter-controls">
                             <input type="text" id="search_products" class="search-input" placeholder="🔍 Buscar premios..." oninput="filterProducts()">
                             <select id="filter_status" class="filter-select" onchange="filterProducts()">
@@ -672,7 +382,7 @@ if ($selectedEventId) {
                                 <div class="products-grid">
                                     <?php if (empty($standProducts[$standInfo['id']])): ?>
                                         <div class="no-products">
-                                            <h4>📦 Sin premios</h4>
+                                            <h4><i class="fa-solid fa-box"></i> Sin premios</h4>
                                             <p>Este stand aún no tiene premios disponibles.</p>
                                         </div>
                                     <?php else: ?>
@@ -695,7 +405,7 @@ if ($selectedEventId) {
                                                             alt="<?php echo htmlspecialchars($prod['name']); ?>"
                                                             style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
                                                     <?php else: ?>
-                                                        🎁
+                                                        <i class="fa-solid fa-gift"></i>
                                                     <?php endif; ?>
                                                 </div>
 
@@ -709,17 +419,23 @@ if ($selectedEventId) {
                                                         </div>
                                                     <?php endif; ?>
                                                     <div class="product-points">
-                                                        ⚡ <?php echo number_format($prod['points_required']); ?> puntos
+                                                        <i class="fa-solid fa-bolt"></i> <?php echo number_format($prod['points_required']); ?> puntos
                                                     </div>
                                                 </div>
 
                                                 <div class="product-status <?php echo $statusClass; ?>">
-                                                    <?php echo $statusText; ?>
+                                                    <?php if ($isClaimed): ?>
+                                                        <i class="fa-solid fa-gift"></i> Ya Reclamado
+                                                    <?php elseif ($canAfford): ?>
+                                                        <i class="fa-solid fa-check"></i> Puedes Reclamar
+                                                    <?php else: ?>
+                                                        <i class="fa-solid fa-xmark"></i> Puntos Insuficientes
+                                                    <?php endif; ?>
                                                 </div>
 
                                                 <?php if (!$isClaimed && $canAfford): ?>
                                                     <div class="claim-ready-badge">
-                                                        ✓ Listo para obtener
+                                                        <i class="fa-solid fa-circle-check"></i> Listo para obtener
                                                     </div>
                                                 <?php endif; ?>
                                             </div>

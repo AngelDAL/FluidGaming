@@ -1,7 +1,5 @@
 <?php
-/**
- * Leaderboard service for ranking calculations and caching
- */
+require_once __DIR__ . '/CacheService.php';
 
 class LeaderboardService {
     private $conn;

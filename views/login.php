@@ -22,7 +22,7 @@
     <div class="particles" id="particles"></div>
     <div class="login-container">
         <div class="login-header">
-            <h1>FluidGaming</h1>
+            <h1>Gamersland</h1>
             <p>Accede a tu cuenta para dominar los torneos</p>
         </div>
 

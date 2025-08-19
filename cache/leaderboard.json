@@ -2,21 +2,405 @@
     "data": [
         {
             "rank": 1,
-            "user_id": 2,
-            "nickname": "Quieto",
-            "profile_image": "..\/uploads\/profiles\/68894e13563fe.jpeg",
-            "total_points": 150,
+            "user_id": 25,
+            "nickname": "IceSniper31",
+            "profile_image": null,
+            "total_points": 4975,
             "first_point_date": null
         },
         {
             "rank": 2,
-            "user_id": 3,
-            "nickname": "test_user",
+            "user_id": 38,
+            "nickname": "NinjaHunter31",
             "profile_image": null,
-            "total_points": 100,
+            "total_points": 4893,
+            "first_point_date": null
+        },
+        {
+            "rank": 3,
+            "user_id": 101,
+            "nickname": "ThunderRogue96",
+            "profile_image": null,
+            "total_points": 4858,
+            "first_point_date": null
+        },
+        {
+            "rank": 4,
+            "user_id": 58,
+            "nickname": "FuriousRobot51",
+            "profile_image": null,
+            "total_points": 4841,
+            "first_point_date": null
+        },
+        {
+            "rank": 5,
+            "user_id": 6,
+            "nickname": "FireRobot83",
+            "profile_image": null,
+            "total_points": 4762,
+            "first_point_date": null
+        },
+        {
+            "rank": 6,
+            "user_id": 11,
+            "nickname": "CrazyViking67",
+            "profile_image": null,
+            "total_points": 4747,
+            "first_point_date": null
+        },
+        {
+            "rank": 7,
+            "user_id": 24,
+            "nickname": "NinjaPhoenix75",
+            "profile_image": null,
+            "total_points": 4747,
+            "first_point_date": null
+        },
+        {
+            "rank": 8,
+            "user_id": 93,
+            "nickname": "FireRider77",
+            "profile_image": null,
+            "total_points": 4677,
+            "first_point_date": null
+        },
+        {
+            "rank": 9,
+            "user_id": 27,
+            "nickname": "FireMaster40",
+            "profile_image": null,
+            "total_points": 4659,
+            "first_point_date": null
+        },
+        {
+            "rank": 10,
+            "user_id": 8,
+            "nickname": "BraveKnight74",
+            "profile_image": null,
+            "total_points": 4631,
+            "first_point_date": null
+        },
+        {
+            "rank": 11,
+            "user_id": 44,
+            "nickname": "NinjaFalcon52",
+            "profile_image": null,
+            "total_points": 4580,
+            "first_point_date": null
+        },
+        {
+            "rank": 12,
+            "user_id": 54,
+            "nickname": "GhostRider88",
+            "profile_image": null,
+            "total_points": 4532,
+            "first_point_date": null
+        },
+        {
+            "rank": 13,
+            "user_id": 13,
+            "nickname": "SteelRider23",
+            "profile_image": null,
+            "total_points": 4479,
+            "first_point_date": null
+        },
+        {
+            "rank": 14,
+            "user_id": 52,
+            "nickname": "ThunderKing33",
+            "profile_image": null,
+            "total_points": 4447,
+            "first_point_date": null
+        },
+        {
+            "rank": 15,
+            "user_id": 21,
+            "nickname": "SilentMaster81",
+            "profile_image": null,
+            "total_points": 4434,
+            "first_point_date": null
+        },
+        {
+            "rank": 16,
+            "user_id": 103,
+            "nickname": "EpicRider22",
+            "profile_image": null,
+            "total_points": 4344,
+            "first_point_date": null
+        },
+        {
+            "rank": 17,
+            "user_id": 86,
+            "nickname": "CrazyHero17",
+            "profile_image": null,
+            "total_points": 4258,
+            "first_point_date": null
+        },
+        {
+            "rank": 18,
+            "user_id": 95,
+            "nickname": "LionPlayer20",
+            "profile_image": null,
+            "total_points": 4160,
+            "first_point_date": null
+        },
+        {
+            "rank": 19,
+            "user_id": 42,
+            "nickname": "FastQueen30",
+            "profile_image": null,
+            "total_points": 4154,
+            "first_point_date": null
+        },
+        {
+            "rank": 20,
+            "user_id": 90,
+            "nickname": "FireMaster94",
+            "profile_image": null,
+            "total_points": 4112,
+            "first_point_date": null
+        },
+        {
+            "rank": 21,
+            "user_id": 47,
+            "nickname": "NinjaRogue35",
+            "profile_image": null,
+            "total_points": 4073,
+            "first_point_date": null
+        },
+        {
+            "rank": 22,
+            "user_id": 76,
+            "nickname": "NinjaWizard52",
+            "profile_image": null,
+            "total_points": 4053,
+            "first_point_date": null
+        },
+        {
+            "rank": 23,
+            "user_id": 55,
+            "nickname": "SteelAlien54",
+            "profile_image": null,
+            "total_points": 4048,
+            "first_point_date": null
+        },
+        {
+            "rank": 24,
+            "user_id": 49,
+            "nickname": "LionLegend80",
+            "profile_image": null,
+            "total_points": 3988,
+            "first_point_date": null
+        },
+        {
+            "rank": 25,
+            "user_id": 65,
+            "nickname": "CrazyGamer50",
+            "profile_image": null,
+            "total_points": 3923,
+            "first_point_date": null
+        },
+        {
+            "rank": 26,
+            "user_id": 81,
+            "nickname": "GhostRogue92",
+            "profile_image": null,
+            "total_points": 3874,
+            "first_point_date": null
+        },
+        {
+            "rank": 27,
+            "user_id": 83,
+            "nickname": "CrazyRobot36",
+            "profile_image": null,
+            "total_points": 3806,
+            "first_point_date": null
+        },
+        {
+            "rank": 28,
+            "user_id": 75,
+            "nickname": "FastRider24",
+            "profile_image": null,
+            "total_points": 3661,
+            "first_point_date": null
+        },
+        {
+            "rank": 29,
+            "user_id": 26,
+            "nickname": "LuckyFalcon59",
+            "profile_image": null,
+            "total_points": 3660,
+            "first_point_date": null
+        },
+        {
+            "rank": 30,
+            "user_id": 9,
+            "nickname": "SilentMaster29",
+            "profile_image": null,
+            "total_points": 3624,
+            "first_point_date": null
+        },
+        {
+            "rank": 31,
+            "user_id": 51,
+            "nickname": "ThunderRobot64",
+            "profile_image": null,
+            "total_points": 3609,
+            "first_point_date": null
+        },
+        {
+            "rank": 32,
+            "user_id": 33,
+            "nickname": "LionLegend15",
+            "profile_image": null,
+            "total_points": 3561,
+            "first_point_date": null
+        },
+        {
+            "rank": 33,
+            "user_id": 40,
+            "nickname": "BraveWizard57",
+            "profile_image": null,
+            "total_points": 3553,
+            "first_point_date": null
+        },
+        {
+            "rank": 34,
+            "user_id": 99,
+            "nickname": "ShadowMaster47",
+            "profile_image": null,
+            "total_points": 3512,
+            "first_point_date": null
+        },
+        {
+            "rank": 35,
+            "user_id": 23,
+            "nickname": "LionPlayer78",
+            "profile_image": null,
+            "total_points": 3386,
+            "first_point_date": null
+        },
+        {
+            "rank": 36,
+            "user_id": 91,
+            "nickname": "DragonRogue42",
+            "profile_image": null,
+            "total_points": 3383,
+            "first_point_date": null
+        },
+        {
+            "rank": 37,
+            "user_id": 10,
+            "nickname": "DragonMaster54",
+            "profile_image": null,
+            "total_points": 3368,
+            "first_point_date": null
+        },
+        {
+            "rank": 38,
+            "user_id": 20,
+            "nickname": "GhostRider31",
+            "profile_image": null,
+            "total_points": 3332,
+            "first_point_date": null
+        },
+        {
+            "rank": 39,
+            "user_id": 5,
+            "nickname": "DragonGamer89",
+            "profile_image": null,
+            "total_points": 3260,
+            "first_point_date": null
+        },
+        {
+            "rank": 40,
+            "user_id": 53,
+            "nickname": "ShadowAlien19",
+            "profile_image": null,
+            "total_points": 3236,
+            "first_point_date": null
+        },
+        {
+            "rank": 41,
+            "user_id": 94,
+            "nickname": "LionSamurai71",
+            "profile_image": null,
+            "total_points": 3229,
+            "first_point_date": null
+        },
+        {
+            "rank": 42,
+            "user_id": 12,
+            "nickname": "LionFalcon81",
+            "profile_image": null,
+            "total_points": 3111,
+            "first_point_date": null
+        },
+        {
+            "rank": 43,
+            "user_id": 36,
+            "nickname": "LuckyKing34",
+            "profile_image": null,
+            "total_points": 3076,
+            "first_point_date": null
+        },
+        {
+            "rank": 44,
+            "user_id": 64,
+            "nickname": "CrazyPlayer85",
+            "profile_image": null,
+            "total_points": 3066,
+            "first_point_date": null
+        },
+        {
+            "rank": 45,
+            "user_id": 16,
+            "nickname": "CrazyQueen20",
+            "profile_image": null,
+            "total_points": 2793,
+            "first_point_date": null
+        },
+        {
+            "rank": 46,
+            "user_id": 35,
+            "nickname": "ShadowWizard15",
+            "profile_image": null,
+            "total_points": 2790,
+            "first_point_date": null
+        },
+        {
+            "rank": 47,
+            "user_id": 80,
+            "nickname": "FireMaster18",
+            "profile_image": null,
+            "total_points": 2748,
+            "first_point_date": null
+        },
+        {
+            "rank": 48,
+            "user_id": 84,
+            "nickname": "GhostViking19",
+            "profile_image": null,
+            "total_points": 2739,
+            "first_point_date": null
+        },
+        {
+            "rank": 49,
+            "user_id": 70,
+            "nickname": "CrazyRider97",
+            "profile_image": null,
+            "total_points": 2683,
+            "first_point_date": null
+        },
+        {
+            "rank": 50,
+            "user_id": 43,
+            "nickname": "DarkRider67",
+            "profile_image": null,
+            "total_points": 2507,
             "first_point_date": null
         }
     ],
-    "created_at": 1753999485,
-    "expires_at": 1753999545
+    "created_at": 1755637591,
+    "expires_at": 1755637651
 }

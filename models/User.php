@@ -1,9 +1,12 @@
+
+
 <?php
 /**
  * User model
  */
 
-class User {
+class User
+{
     private $conn;
     private $table_name = "users";
 
@@ -16,14 +19,27 @@ class User {
     public $total_points;
     public $created_at;
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->conn = $db;
+    }
+
+    /**
+     * Obtener todos los usuarios (id, nickname, total_points, profile_image)
+     */
+    public function getAll()
+    {
+        $query = "SELECT id, nickname, total_points, profile_image FROM " . $this->table_name . " ORDER BY nickname ASC";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     /**
      * Validate user input for registration
      */
-    public function validateRegistration($nickname, $email, $password, $profile_image = null) {
+    public function validateRegistration($nickname, $email, $password, $profile_image = null)
+    {
         $errors = [];
 
         // Validate nickname
@@ -61,7 +77,8 @@ class User {
     /**
      * Validate profile image
      */
-    public function validateProfileImage($image) {
+    public function validateProfileImage($image)
+    {
         $errors = [];
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
         $maxSize = 5 * 1024 * 1024; // 5MB
@@ -91,31 +108,34 @@ class User {
     /**
      * Check if nickname already exists
      */
-    public function nicknameExists($nickname) {
+    public function nicknameExists($nickname)
+    {
         $query = "SELECT id FROM " . $this->table_name . " WHERE nickname = :nickname LIMIT 1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':nickname', $nickname);
         $stmt->execute();
-        
+
         return $stmt->rowCount() > 0;
     }
 
     /**
      * Check if email already exists
      */
-    public function emailExists($email) {
+    public function emailExists($email)
+    {
         $query = "SELECT id FROM " . $this->table_name . " WHERE email = :email LIMIT 1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-        
+
         return $stmt->rowCount() > 0;
     }
 
     /**
      * Create new user
      */
-    public function create($nickname, $email, $password, $profile_image = null) {
+    public function create($nickname, $email, $password, $profile_image = null)
+    {
         // Validate input
         $errors = $this->validateRegistration($nickname, $email, $password, $profile_image);
         if (!empty($errors)) {
@@ -151,12 +171,12 @@ class User {
         $query = "INSERT INTO " . $this->table_name . " 
                   (nickname, email, password_hash, profile_image, role, total_points) 
                   VALUES (:nickname, :email, :password_hash, :profile_image, :role, :total_points)";
-        
+
         $stmt = $this->conn->prepare($query);
-        
+
         $role = 'user';
         $totalPoints = 0;
-        
+
         $stmt->bindParam(':nickname', $nickname);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password_hash', $hashedPassword);
@@ -175,9 +195,10 @@ class User {
     /**
      * Upload profile image
      */
-    private function uploadProfileImage($image) {
+    private function uploadProfileImage($image)
+    {
         $uploadDir = '../uploads/profiles/';
-        
+
         // Create directory if it doesn't exist
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0755, true);
@@ -197,7 +218,8 @@ class User {
     /**
      * Get predefined image path
      */
-    private function getPredefinedImagePath($imageId) {
+    private function getPredefinedImagePath($imageId)
+    {
         $predefinedImages = [
             '1' => 'https://via.placeholder.com/150/FF6B6B/FFFFFF?text=1',
             '2' => 'https://via.placeholder.com/150/4ECDC4/FFFFFF?text=2',
@@ -208,25 +230,26 @@ class User {
             '7' => 'https://via.placeholder.com/150/98D8C8/FFFFFF?text=7',
             '8' => 'https://via.placeholder.com/150/F7DC6F/333333?text=8'
         ];
-        
+
         return $predefinedImages[$imageId] ?? null;
     }
 
     /**
      * Authenticate user
      */
-    public function authenticate($email, $password) {
+    public function authenticate($email, $password)
+    {
         $query = "SELECT id, nickname, email, password_hash, profile_image, role, total_points 
                   FROM " . $this->table_name . " 
                   WHERE email = :email LIMIT 1";
-        
+
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch();
-            
+
             if (password_verify($password, $row['password_hash'])) {
                 $this->id = $row['id'];
                 $this->nickname = $row['nickname'];
@@ -234,7 +257,7 @@ class User {
                 $this->profile_image = $row['profile_image'];
                 $this->role = $row['role'];
                 $this->total_points = $row['total_points'];
-                
+
                 return ['success' => true, 'user' => $row];
             }
         }
@@ -245,11 +268,12 @@ class User {
     /**
      * Get user by ID
      */
-    public function getById($id) {
+    public function getById($id)
+    {
         $query = "SELECT id, nickname, email, profile_image, role, total_points, created_at 
                   FROM " . $this->table_name . " 
                   WHERE id = :id LIMIT 1";
-        
+
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();

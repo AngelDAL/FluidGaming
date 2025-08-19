@@ -24,297 +24,55 @@ if (!$user) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notificaciones - Sistema de Puntos</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
-            line-height: 1.6;
-        }
-
-        .navbar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar h1 {
-            font-size: 1.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .header-section {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-section h2 {
-            color: #333;
-            margin: 0;
-        }
-
-        .notification-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: transform 0.2s;
-            font-size: 0.9rem;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: #6c757d;
-        }
-
-        .notifications-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .notification-item {
-            padding: 1.5rem;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            transition: background 0.3s;
-            cursor: pointer;
-        }
-
-        .notification-item:hover {
-            background: #f8f9fa;
-        }
-
-        .notification-item:last-child {
-            border-bottom: none;
-        }
-
-        .notification-item.unread {
-            background: #f0f8ff;
-            border-left: 4px solid #667eea;
-        }
-
-        .notification-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .notification-icon.tournament {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-
-        .notification-icon.points {
-            background: #e8f5e8;
-            color: #388e3c;
-        }
-
-        .notification-icon.event {
-            background: #fff3e0;
-            color: #f57c00;
-        }
-
-        .notification-icon.system {
-            background: #fce4ec;
-            color: #c2185b;
-        }
-
-        .notification-content {
-            flex: 1;
-        }
-
-        .notification-title {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .notification-message {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .notification-time {
-            color: #999;
-            font-size: 0.8rem;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: #666;
-        }
-
-        .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #ccc;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-        }
-
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .pagination button {
-            background: white;
-            border: 1px solid #ddd;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .pagination button:hover:not(:disabled) {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        .pagination button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .unread-badge {
-            background: #dc3545;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="../views/styles.css?v=2">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <h1>Centro de Notificaciones</h1>
-            <div class="nav-links">
-                <a href="../dashboard.php">Dashboard</a>
-                <a href="../views/leaderboard.php">Leaderboard</a>
-                <span>¡Hola, <?php echo htmlspecialchars($user['nickname']); ?>!</span>
-            </div>
+    <nav class="navbar" style="padding: 0.7rem 0;">
+        <div class="container" style="display: flex; align-items: center; justify-content: flex-start; gap: 1.2rem;">
+            <a href="../" class="btn dark" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; min-width: 120px; justify-content: center;">
+                <i class="fa-solid fa-arrow-left"></i> Regresar
+            </a>
+            <span style="font-size: 1.2rem; font-weight: 700; color: #e2e8f0; letter-spacing: 0.5px;">Notificaciones</span>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="header-section">
-            <div>
-                <h2>Mis Notificaciones</h2>
-                <p>Mantente al día con las últimas actualizaciones</p>
+    <div class="container" style="max-width: 800px; margin: 0 auto;">
+        <!-- Encabezado de la sección -->
+        <div class="section-card" style="margin-bottom: 2rem; padding: 1.5rem 2rem 1.2rem 2rem; display: flex; flex-direction: column; gap: 0.5rem; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-bell" style="font-size: 1.3rem; color: #fff;"></i>
+                </div>
+                <h2 style="margin: 0; font-size: 1.2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; letter-spacing: 0.5px;">Notificaciones</h2>
             </div>
-            <div class="notification-actions">
-                <button class="btn btn-secondary" onclick="markAllAsRead()">
-                    Marcar Todas como Leídas
+            <div class="notification-actions" style="margin-top: 0.5rem; display: flex; gap: 1rem; justify-content: center;">
+                <button class="btn dark" style="min-width: 44px; justify-content: center;" onclick="markAllAsRead()" title="Marcar todas como leídas">
+                    <i class="fa-solid fa-envelope-open-text"></i>
                 </button>
-                <button class="btn" onclick="refreshNotifications()">
-                    Actualizar
+                <button class="btn primary" style="min-width: 44px; justify-content: center;" onclick="refreshNotifications()" title="Actualizar">
+                    <i class="fa-solid fa-arrows-rotate"></i>
                 </button>
             </div>
         </div>
 
-        <div id="error-container"></div>
-        
-        <div class="notifications-container">
-            <div id="loading" class="loading">
+        <!-- Mensajes de error o éxito -->
+        <div id="error-container" style="margin-bottom: 1.2rem;"></div>
+
+        <!-- Lista de notificaciones -->
+        <div class="section-card" style="padding:0; background: rgba(15, 15, 35, 0.7); border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+            <div id="loading" class="loading-message">
                 <p>Cargando notificaciones...</p>
             </div>
             <div id="notifications-list"></div>
         </div>
 
-        <div id="pagination" class="pagination" style="display: none;">
-            <button id="prev-btn" onclick="loadPreviousPage()">Anterior</button>
-            <span id="page-info">Página 1</span>
-            <button id="next-btn" onclick="loadNextPage()">Siguiente</button>
+        <!-- Paginación -->
+        <div id="pagination" class="pagination" style="display: none; margin-top: 2rem;">
+            <button id="prev-btn" class="btn dark" onclick="loadPreviousPage()"><i class="fa-solid fa-chevron-left"></i> Anterior</button>
+            <span id="page-info" style="font-weight: 600; color: #667eea;">Página 1</span>
+            <button id="next-btn" class="btn dark" onclick="loadNextPage()">Siguiente <i class="fa-solid fa-chevron-right"></i></button>
         </div>
     </div>
 
@@ -350,47 +108,46 @@ if (!$user) {
         // Display notifications
         function displayNotifications(notifications) {
             const container = document.getElementById('notifications-list');
-            
             if (notifications.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🔔</div>
-                        <h3>No tienes notificaciones</h3>
-                        <p>Cuando recibas notificaciones aparecerán aquí</p>
+                        <i class="fa-regular fa-bell-slash empty-icon"></i>
+                        <div class="empty-title">No tienes notificaciones</div>
+                        <div class="empty-desc">Cuando recibas notificaciones aparecerán aquí</div>
                     </div>
                 `;
                 return;
             }
-
             container.innerHTML = notifications.map(notification => `
-                <div class="notification-item ${!notification.is_read ? 'unread' : ''}" 
+                <div class="event-card notification-item${!notification.is_read ? ' unread' : ''}"
+                     style="display: flex; align-items: flex-start; gap: 1.5rem; cursor: pointer; border-left: ${!notification.is_read ? '4px solid #667eea' : 'none'}; background: ${!notification.is_read ? 'rgba(102,126,234,0.07)' : 'rgba(15,15,35,0.6)'};"
                      onclick="markAsRead(${notification.id})">
-                    <div class="notification-icon ${notification.type}">
+                    <div class="notification-icon" style="font-size:2rem; min-width:48px; min-height:48px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:rgba(102,126,234,0.12);">
                         ${getNotificationIcon(notification.type)}
                     </div>
-                    <div class="notification-content">
-                        <div class="notification-title">${escapeHtml(notification.title)}</div>
-                        <div class="notification-message">${escapeHtml(notification.message)}</div>
-                        <div class="notification-time">${formatTime(notification.created_at)}</div>
+                    <div class="notification-content" style="flex:1;">
+                        <div class="notification-title" style="font-weight:700; color:#e2e8f0; margin-bottom:0.25rem; font-size:1.1rem;">${escapeHtml(notification.title)}</div>
+                        <div class="notification-message" style="color:#94a3b8; font-size:0.98rem; margin-bottom:0.25rem;">${escapeHtml(notification.message)}</div>
+                        <div class="notification-time" style="color:#667eea; font-size:0.85rem;"><i class="fa-regular fa-clock"></i> ${formatTime(notification.created_at)}</div>
                     </div>
-                    ${!notification.is_read ? '<div class="unread-badge"></div>' : ''}
+                    ${!notification.is_read ? '<div class="unread-badge" style="background:#ff4757; color:white; width:20px; height:20px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-size:0.8rem; margin-left:0.5rem;"><i class=\'fa-solid fa-circle\'></i></div>' : ''}
                 </div>
             `).join('');
         }
 
-        // Get notification icon based on type
+        // Get notification icon based on type (FontAwesome)
         function getNotificationIcon(type) {
             switch (type) {
                 case 'tournament':
-                    return '🏆';
+                    return '<i class="fa-solid fa-trophy" style="color:#ffd700;"></i>';
                 case 'points':
-                    return '⭐';
+                    return '<i class="fa-solid fa-star" style="color:#fbbf24;"></i>';
                 case 'event':
-                    return '📅';
+                    return '<i class="fa-solid fa-calendar-check" style="color:#38bdf8;"></i>';
                 case 'system':
-                    return '🔔';
+                    return '<i class="fa-solid fa-bell" style="color:#667eea;"></i>';
                 default:
-                    return '📢';
+                    return '<i class="fa-solid fa-bullhorn" style="color:#764ba2;"></i>';
             }
         }
 
